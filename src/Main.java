@@ -24,12 +24,12 @@ public class Main {
 
 
     //path alla root del progetto
-    @Parameter(names = {"--pom", "-p"}, required = true, description = "absolute path to project directory")
+    @Parameter(names = {"--project", "-p"}, required = true, description = "absolute path to project directory")
     private static String pathToPom;
 
 
     //elenco dei goals
-    @Parameter(names = {"--goal", "-g"}, description = "maven goal")
+    @Parameter(names = {"--goal", "-g"}, description = "maven goals (es. -g goal1 -g goal2)")
     private static List<String> goals = new ArrayList<>(Arrays.asList("clean", "install"));
 
 
