@@ -1,6 +1,7 @@
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 
+import com.sun.javafx.PlatformUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,6 +10,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import com.sun.javafx.util.Utils;
 
 
 public class Main {
@@ -30,7 +33,7 @@ public class Main {
 
     //elenco dei goals
     @Parameter(names = {"--goal", "-g"}, description = "maven goals (es. -g goal1 -g goal2)")
-    private static List<String> goals = new ArrayList<>(Arrays.asList("clean", "install"));
+    private static List<String> goals = new ArrayList<>(Arrays.asList("clean", "compile"));
 
 
     public static void main(String[] args) {
@@ -74,7 +77,14 @@ public class Main {
 
         try{
 
-            String command = "mvn -f "+pathToPom+" "+args;
+            String command = "";
+
+            if(!PlatformUtil.isWindows()){
+                command = "mvn -f "+pathToPom+" "+args;
+            }else{
+                LOGGER.info("windows detected: adjusting command...");
+                command = "cmd /c mvn -f "+pathToPom+" "+args;
+            }
 
             LOGGER.info("running: {}", command);
 
