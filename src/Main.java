@@ -26,12 +26,12 @@ public class Main {
     //CLI params declaration
 
 
-    //path alla root del progetto
+    //project root path
     @Parameter(names = {"--project", "-p"}, required = true, description = "absolute path to project directory")
     private static String pathToPom;
 
 
-    //elenco dei goals
+    //goals list
     @Parameter(names = {"--goal", "-g"}, description = "maven goals (es. -g goal1 -g goal2)")
     private static List<String> goals = new ArrayList<>(Arrays.asList("clean", "compile"));
 
